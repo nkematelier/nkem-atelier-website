@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nkem Atelier</title>
+  <style>
+    :root {
+      --black: #101010;
+      --white: #ffffff;
+      --cream: #faf7f2;
+      --beige: #e8dccd;
+      --beige-soft: #f3eadf;
+      --line: #d9cabc;
+      --text: #4d4842;
+      --soft: #f6f4f1;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--black);
+      background: var(--white);
+    }
+
+    p {
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.7;
+      margin: 0 0 22px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 32px;
+      gap: 28px;
+    }
+
+    .brand {
+      font-size: 25px;
+      letter-spacing: 3px;
+      white-space: nowrap;
+    }
+
+    body.home-active .brand {
+      visibility: hidden;
+    }
+
+    .links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      color: #333;
+    }
+
+    .links button {
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+      padding: 4px 0;
+    }
+
+    .links button.active {
+      border-bottom: 1px solid var(--black);
+    }
+
+    main.page { display: none; }
+    main.page.active { display: block; }
+
+    .section {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 76px 38px;
+    }
+
+    .title {
+      text-align: center;
+      padding: 72px 38px 42px;
+    }
+
+    h1 {
+      font-size: clamp(44px, 6vw, 78px);
+      font-weight: 400;
+      letter-spacing: 5px;
+      margin: 0;
+    }
+
+    .subtitle {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-top: 10px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 4vw, 54px);
+      font-weight: 400;
+      margin: 0 0 26px;
+      letter-spacing: 1px;
+    }
+
+    h3 {
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      margin: 0 0 24px;
+    }
+
+    .hero-img,
+    .video-box {
+      width: 100%;
+      max-width: 1040px;
+      height: 470px;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: var(--beige-soft);
+    }
+
+    .hero-img img,
+    .split-img img,
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-box video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 100px;
+      align-items: start;
+      max-width: 1040px;
+      margin: 78px auto 0;
+    }
+
+    .intro-grid .statement {
+      font-size: clamp(34px, 4vw, 46px);
+      line-height: 1.25;
+      margin: 0;
+      color: var(--black);
+    }
+
+    .review {
+      background: var(--soft);
+      text-align: center;
+      padding: 78px 28px;
+      margin-top: 58px;
+    }
+
+    .review .quote-mark {
+      font-size: 60px;
+      line-height: 0.7;
+      margin-bottom: 26px;
+      color: var(--black);
+    }
+
+    .review p {
+      max-width: 850px;
+      margin: 0 auto 28px;
+      font-size: 22px;
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    .review .name {
+      font-family: Arial, sans-serif;
+      letter-spacing: 3px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 640px;
+      border-top: 1px solid var(--line);
+    }
+
+    .split.reverse .split-img { order: 2; }
+
+    .split-img {
+      min-height: 640px;
+      background: var(--beige-soft);
+      overflow: hidden;
+    }
+
+    .split-copy {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 72px 88px;
+      text-align: center;
+    }
+
+    .split-copy .inner { max-width: 520px; }
+
+    .small-line {
+      width: 150px;
+      height: 1px;
+      background: var(--line);
+      margin: 0 auto 48px;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      background: var(--beige);
+      padding: 16px 34px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .price-card {
+      border: 1px solid var(--line);
+      background: var(--cream);
+      padding: 54px 38px;
+      text-align: center;
+      max-width: 420px;
+    }
+
+    .two-col {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.85fr;
+      gap: 84px;
+      align-items: start;
+    }
+
+    .about-img {
+      height: 620px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    .credential {
+      margin-top: 28px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 22px 0;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #333;
+    }
+
+    .faq {
+      max-width: 940px;
+      margin: 0 auto;
+      padding-top: 35px;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      background: var(--white);
+      margin-bottom: 18px;
+      padding: 0;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 22px 30px;
+      font-family: Arial, sans-serif;
+      font-size: 17px;
+      color: var(--black);
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::before {
+      content: "▾";
+      margin-right: 16px;
+      font-size: 15px;
+    }
+
+    details p {
+      border-top: 1px solid var(--line);
+      padding: 26px 30px;
+      font-family: Arial, sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .badge-row {
+      max-width: 900px;
+      margin: 80px auto 20px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .badge {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: var(--black);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .badge span:first-child {
+      font-size: 29px;
+      line-height: 1.2;
+    }
+
+    .badge span:last-child {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+      margin-top: 18px;
+    }
+
+    .coming-soon {
+      min-height: 550px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      text-align: center;
+      font-size: clamp(42px, 6vw, 82px);
+      letter-spacing: 5px;
+      color: var(--text);
+    }
+
+    .contact-frame {
+      max-width: 860px;
+      min-height: 760px;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      background: var(--cream);
+      overflow: hidden;
+    }
+
+    .contact-frame iframe {
+      width: 100%;
+      height: 760px;
+      border: 0;
+      display: block;
+    }
+
+    .social-footer {
+      text-align: center;
+      padding: 68px 20px 88px;
+      background: var(--white);
+      border-top: 1px solid var(--line);
+    }
+
+    .social-footer h3 {
+      font-family: Arial, sans-serif;
+      font-size: 34px;
+      letter-spacing: 8px;
+      color: #777;
+      margin-bottom: 34px;
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+
+    .social-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 230px;
+      padding: 18px 26px;
+      background: var(--black);
+      color: white;
+      border-radius: 4px;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    }
+
+    .social-btn.beige {
+      background: var(--beige);
+      color: var(--black);
+      border: 1px solid var(--line);
+    }
+
+    @media (max-width: 900px) {
+      .nav { flex-direction: column; align-items: flex-start; }
+      .links { flex-wrap: wrap; gap: 14px; }
+      .hero-img, .video-box { height: 320px; }
+      .intro-grid, .split, .two-col, .badge-row {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .split.reverse .split-img { order: 0; }
+      .split-copy { padding: 48px 28px; }
+      .split-img { min-height: 420px; }
+    }
+  </style>
+</head>
+
+<body class="home-active">
+<header>
+  <nav class="nav">
+    <button class="brand nav-btn" data-page="home">NKEM ATELIER</button>
+    <div class="links">
+      <button class="nav-btn active" data-page="home">Home</button>
+      <button class="nav-btn" data-page="bespoke">Bespoke & Customisation</button>
+      <button class="nav-btn" data-page="alterations">Dress Alteration</button>
+      <button class="nav-btn" data-page="bridal-dressing">Bridal Dressing</button>
+      <button class="nav-btn" data-page="accessories">Accessories</button>
+      <button class="nav-btn" data-page="blog">Blog</button>
+      <button class="nav-btn" data-page="about">About</button>
+      <button class="nav-btn" data-page="contact">Contact</button>
+    </div>
+  </nav>
+</header>
+
+<main id="home" class="page active">
+  <section class="title">
+    <h1>NKEM ATELIER</h1>
+    <div class="subtitle">Dressmakers & Alterations</div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="hero-img">
+      <img src="assets/home-hero.png" alt="Elegant bridal gown with lace veil">
+    </div>
+
+    <div class="intro-grid">
+      <p class="statement">Nkem means “mine” and that is the heart of the atelier.</p>
+      <div>
+        <p>Every garment is designed, fitted or altered with care, so it feels personal, comfortable and truly yours.</p>
+        <p>Whether you need wedding dress alterations, bespoke bridalwear, custom bridal changes, or a special occasion dress made or fitted in Bristol, Nkem Atelier offers careful, friendly and professional dressmaking to help your garment feel truly yours.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="review">
+    <div class="quote-mark">“</div>
+    <p>I can’t thank Alexandra enough for what she did with my wedding dress. When I first brought it in, it was too small and I honestly wasn’t sure it could be altered to fit properly. From the very first fitting, she put me at ease and was so patient and reassuring throughout the process. Each fitting brought the dress closer to perfection, and by the end it fit like it had been made for me. Not only did it look beautiful, but I felt comfortable and confident wearing it on my wedding day. I will keep recommending Nkem Atelier xx</p>
+    <div class="name">Rosaline Horswell</div>
+  </section>
+
+  <section class="social-footer">
+    <h3>Follow Us</h3>
+    <div class="social-buttons">
+      <a class="social-btn" href="https://www.instagram.com/shop.nkem" target="_blank">@shop.nkem</a>
+      <a class="social-btn beige" href="https://www.tiktok.com/@shop.nkem" target="_blank">@shop.nkem</a>
+    </div>
+  </section>
+</main>
+
+<main id="bespoke" class="page">
+  <section class="title">
+    <h1>Bespoke & Customisation</h1>
+    <div class="subtitle">From first idea to final fitting</div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="video-box">
+      <video autoplay muted loop playsinline controls>
+        <source src="assets/bespoke-customisation.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <section class="split">
+    <div class="split-img"><img src="assets/bespoke-sketch.png" alt="Bespoke bridal sketch"></div>
+    <div class="split-copy">
+      <div class="inner">
+        <h2>Bespoke</h2>
+        <div class="small-line"></div>
+        <p>At Nkem Atelier, bespoke dressmaking is for clients who want a garment created especially for them, with the fit, style and finish considered from the very beginning.</p>
+        <p>I create wedding dresses, civil ceremony looks, bridal reception dresses and special occasion pieces for clients who want something personal, beautifully fitted and made to feel like their own.</p>
+        <p>Bespoke services start from £600.</p>
+        <a class="button" href="https://tally.so/r/vGK4r0" target="_blank">Bespoke enquiry form</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="split reverse">
+    <div class="split-img"><img src="assets/customisation-reveal.png" alt="Bride and bridesmaids customisation reveal"></div>
+    <div class="split-copy">
+      <div class="inner">
+        <h2>Customisation</h2>
+        <div class="small-line"></div>
+        <p>Nkem Atelier offers custom changes for clients who already have a dress but would like it to feel more personal, more flattering or more suited to their day.</p>
+        <p>This can include adding sleeves, changing the neckline, reshaping the bodice, adding lace, softening the design, or creating new details that make the dress feel closer to your style.</p>
+        <p>If you have a loved one’s clothing, a sentimental fabric or an existing dress you would like transformed into something meaningful for your wedding day or special occasion, we can discuss how to carefully include it in your garment.</p>
+        <a class="button" href="https://tally.so/r/vGK4r0" target="_blank">Customisation enquiry form</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 style="text-align:center;">FAQs</h2>
+    <div class="faq">
+      <details><summary>How far before my wedding should I come in?</summary><p>For bespoke pieces, I recommend enquiring as early as possible. Around 6 months before your wedding or event is a good minimum, but a year before is ideal for more detailed designs.</p></details>
+      <details><summary>What is the bespoke process?</summary><p>The process starts with a consultation to discuss your design, fabric, fit and the feeling you want for the garment. From there, we plan fittings and construction so the dress develops carefully from idea to finished piece.</p></details>
+      <details><summary>How much does a bespoke dress cost? And do you offer payment plans?</summary><p>Bespoke services start from £600. The final price depends on the design, fabric, detail and time needed. Payment stages can be discussed before work begins.</p></details>
+      <details><summary>Do you only make wedding dresses?</summary><p>No. Nkem Atelier creates bridal pieces, civil ceremony looks, reception dresses and special occasion dresses.</p></details>
+      <details><summary>What happens if I change my mind on the design?</summary><p>We discuss the design carefully before work begins, but some changes can be made during the process. Larger changes may affect the price and timeline.</p></details>
+      <details><summary>What happens if I change size?</summary><p>Because bespoke garments are made through fittings, some fit changes can be managed during the process. Please let me know as soon as possible if your size changes.</p></details>
+      <details><summary>Do I need to source my own fabric?</summary><p>No. Fabric options can be discussed during your consultation, and you are also welcome to bring a fabric you love so we can assess whether it is suitable.</p></details>
+    </div>
+  </section>
+
+  <section class="review">
+    <div class="quote-mark">“</div>
+    <p>I had my custom graduation dress and custom-made civil wedding dress made by Nkem Atelier, and I absolutely loved them. The dresses were beautifully made, fit perfectly, and exceeded my expectations. The attention to detail and craftsmanship were exceptional, and I received so many compliments on the day. I highly recommend Nkem Atelier for anyone looking for a stunning bespoke outfit for a special occasion.</p>
+    <div class="name">Stephanie Ifeabunike</div>
+  </section>
+
+  <section class="social-footer">
+    <h3>Follow Us</h3>
+    <div class="social-buttons">
+      <a class="social-btn" href="https://www.instagram.com/shop.nkem" target="_blank">@shop.nkem</a>
+      <a class="social-btn beige" href="https://www.tiktok.com/@shop.nkem" target="_blank">@shop.nkem</a>
+    </div>
+  </section>
+</main>
+
+<main id="alterations" class="page">
+  <section class="title">
+    <h1>Dress Alteration</h1>
+    <div class="subtitle">Careful fittings for bridal, prom, bridesmaid and special event dresses</div>
+  </section>
+
+  <section class="split">
+    <div class="split-img"><img src="assets/alteration-bridal.png" alt="Wedding dress alteration pinning close up"></div>
+    <div class="split-copy">
+      <div class="inner">
+        <h2>Alterations made to feel like yours</h2>
+        <p>Your dress should feel comfortable, flattering and right for the moment you are wearing it. At Nkem Atelier, every alteration is carefully considered with care, patience and attention to detail.</p>
+        <p>Whether it is a wedding dress, prom dress, bridesmaid dress or special event dress, the aim is to refine the fit without losing the beauty of the original design.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="split reverse">
+    <div class="split-img"><img src="assets/alteration-hem.png" alt="Dress hem cutting alteration"></div>
+    <div class="split-copy">
+      <div class="inner">
+        <p>Each garment is assessed during your fitting, and your quote is confirmed before any work begins. This allows you to understand the work needed and decide with confidence.</p>
+        <p>Alterations start from £350. You are welcome to send images of your dress before booking, and I can give a rough estimate of what may be possible, but your final quote will be confirmed after your first fitting.</p>
+        <p>Quick-turnaround alterations within 48 hours may be available at an extra cost, depending on the garment, the work required and current availability.</p>
+        <p>The process is calm, clear and focused on making your dress feel secure, comfortable and beautifully finished.</p>
+        <a class="button" href="https://tally.so/r/vGK4r0" target="_blank">Enquire now</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="badge-row">
+    <div class="badge"><span>Recommended<br>seamstress</span><span>WED2B | Just For You Bride</span></div>
+    <p>Nkem Atelier is currently a recommended seamstress for WED2B and Just For You Bride.</p>
+  </section>
+
+  <section class="section">
+    <h2 style="text-align:center;">FAQs</h2>
+    <div class="faq">
+      <details><summary>When should I book my alterations and how long will they take?</summary><p>I recommend booking as soon as you have your dress and your wedding or event date is confirmed. Bridal alterations are usually started around 8 weeks before the date, with a final fitting closer to the day. More detailed changes may need longer.</p></details>
+      <details><summary>How much do alterations cost?</summary><p>Dress alterations start from £350. You can send images of your dress for a rough estimate and to discuss what may be possible, but your final quote will be confirmed after your first fitting.</p></details>
+      <details><summary>Do you offer quick-turnaround alterations?</summary><p>Quick-turnaround alterations within 48 hours may be available at an extra cost, depending on the garment, the work required and current availability.</p></details>
+      <details><summary>How many sizes can my dress be altered by?</summary><p>This depends on the dress construction, seam allowance, fabric and detail. Some dresses can be adjusted more than others, and I will assess this properly during your fitting.</p></details>
+      <details><summary>Can I bring guests to my fitting?</summary><p>Yes, you can bring up to 2 extra guests. I kindly ask that you do not bring children to fittings for safety reasons.</p></details>
+      <details><summary>Can you change the design of my dress?</summary><p>Yes, design changes can be discussed during your fitting. This can include making the dress feel more personal, more flattering or more suited to your day.</p></details>
+      <details><summary>What makes Nkem Atelier different?</summary><p>Nkem Atelier offers calm, careful and professional fittings with attention to construction, finish and detail. I am also a recommended seamstress for WED2B and Just For You Bride.</p></details>
+      <details><summary>What happens with my dress offcuts?</summary><p>Any offcuts from your dress can be returned to you if you would like to keep them. We can also discuss whether they can be used for small keepsake details where possible.</p></details>
+    </div>
+  </section>
+
+  <section class="review">
+    <div class="quote-mark">“</div>
+    <p>I absolutely loved my wedding dress, but after Nkem Atelier worked on it, I couldn’t believe how beautiful it became. Nkem took in the sides for a perfect fit, shortened the length of my lace wedding dress, added a stunning bustle that created a beautiful drape at the back of my train, and designed a bespoke corset that gave my dress the unique touch it was missing. Her attention to detail and craftsmanship were exceptional. She truly transformed my dress and made it feel one of a kind. I couldn’t have been happier with the result and would highly recommend Nkem Atelier to any bride looking for expert alterations xx</p>
+    <div class="name">Kate Mary</div>
+  </section>
+
+  <section class="social-footer">
+    <h3>Follow Us</h3>
+    <div class="social-buttons">
+      <a class="social-btn" href="https://www.instagram.com/shop.nkem" target="_blank">@shop.nkem</a>
+      <a class="social-btn beige" href="https://www.tiktok.com/@shop.nkem" target="_blank">@shop.nkem</a>
+    </div>
+  </section>
+</main>
+
+<main id="bridal-dressing" class="page">
+  <section class="title">
+    <h1>Bridal Dressing</h1>
+    <div class="subtitle">Wedding morning dressing and support</div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="video-box">
+      <video autoplay muted loop playsinline controls>
+        <source src="assets/bridal-dressing.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <section class="section two-col">
+    <div>
+      <h2>Bridal Dressing & Wedding Morning Support</h2>
+      <p>Your wedding morning should feel calm, organised and beautifully supported. This service is for brides who want professional help getting dressed, so the final look feels secure, polished and photo-ready before leaving for the ceremony.</p>
+      <p>I will prepare your outfit, lay out what you need, help you dress from gown to shoes and jewellery, and carefully arrange your dress, veil and train for your morning photos.</p>
+      <p>Your bridal outfit can also be steamed and aired overnight before the wedding morning, so everything is ready with care.</p>
+      <a class="button" href="https://tally.so/r/vGK4r0" target="_blank">Enquire now</a>
+    </div>
+    <div class="price-card">
+      <h3>Service Price</h3>
+      <h2>£45 per hour</h2>
+      <p>Dress steaming is available as an additional service.</p>
+      <h3>Steaming: £40 extra</h3>
+    </div>
+  </section>
+
+  <section class="review">
+    <div class="quote-mark">“</div>
+    <p>Having support on the morning of my wedding made such a difference. Everything was calm, organised and ready for me, from my dress to my shoes, jewellery and final details. Alexandra helped me get dressed carefully and made sure my gown, veil and train looked beautiful for photos before I left. It was one less thing to worry about and I felt completely looked after.</p>
+    <div class="name">Jackie Maxwell</div>
+  </section>
+
+  <section class="social-footer">
+    <h3>Follow Us</h3>
+    <div class="social-buttons">
+      <a class="social-btn" href="https://www.instagram.com/shop.nkem" target="_blank">@shop.nkem</a>
+      <a class="social-btn beige" href="https://www.tiktok.com/@shop.nkem" target="_blank">@shop.nkem</a>
+    </div>
+  </section>
+</main>
+
+<main id="accessories" class="page">
+  <section class="title">
+    <h1>Accessories</h1>
+    <div class="subtitle">Bridal details and finishing touches</div>
+  </section>
+  <section class="section">
+    <div class="coming-soon">COMING SOON</div>
+  </section>
+  <section class="social-footer">
+    <h3>Follow Us</h3>
+    <div class="social-buttons">
+      <a class="social-btn" href="https://www.instagram.com/shop.nkem" target="_blank">@shop.nkem</a>
+      <a class="social-btn beige" href="https://www.tiktok.com/@shop.nkem" target="_blank">@shop.nkem</a>
+    </div>
+  </section>
+</main>
+
+<main id="blog" class="page">
+  <section class="title">
+    <h1>Blog</h1>
+    <div class="subtitle">Bridal guidance, fitting advice and atelier notes</div>
+  </section>
+  <section class="section">
+    <div class="coming-soon">COMING SOON</div>
+  </section>
+  <section class="social-footer">
+    <h3>Follow Us</h3>
+    <div class="social-buttons">
+      <a class="social-btn" href="https://www.instagram.com/shop.nkem" target="_blank">@shop.nkem</a>
+      <a class="social-btn beige" href="https://www.tiktok.com/@shop.nkem" target="_blank">@shop.nkem</a>
+    </div>
+  </section>
+</main>
+
+<main id="about" class="page">
+  <section class="title">
+    <h1>About Nkem Atelier</h1>
+    <div class="subtitle">Personal dressmaking, bridalwear and considered design</div>
+  </section>
+
+  <section class="section two-col">
+    <div>
+      <h2>What Nkem Atelier is about</h2>
+      <p>Nkem Atelier is a Bristol-based dressmaking and bridal atelier founded by Nkemdilim Alexandra, a fashion designer, dressmaker and bridal seamstress.</p>
+      <p>The name Nkem means “mine”, and that meaning is at the heart of the atelier. Every garment is created, fitted or transformed with the intention of making each woman feel that what she is wearing truly belongs to her.</p>
+      <p>Nkem Atelier sits between bridalwear, dressmaking and personal design. It is for women who want garments that feel thoughtful, beautifully fitted and personal to their story.</p>
+      <p>In the bridal space, the atelier offers wedding dress alterations, bespoke bridalwear and custom bridal changes with a calm, careful and design-led approach. In the dressmaking space, Nkem Atelier creates and alters dresses for prom, bridesmaids and special occasions, offering a more personal alternative to ready-made fashion.</p>
+      <p>My love for fashion began early. I grew up around bridalwear and celebration, watching my mother run her bridal boutique and bring brides’ ideas to life. That experience shaped the way I see clothing, not just as something to wear, but as something that can hold confidence, identity and emotion.</p>
+      <p>After moving from Nigeria to the UK, I completed a Master’s degree in Fashion Design at Cardiff Metropolitan University. I have been dressmaking since 2019 and working within bridal design and bridalwear since 2022.</p>
+      <p>Nkem Atelier is known for careful fittings, feminine details, thoughtful design and garments that feel personal rather than generic.</p>
+      <p>For me, dressmaking is about helping women feel beautiful, confident, elegant and completely themselves.</p>
+      <div class="credential">MA Fashion Design, Cardiff Metropolitan University</div>
+    </div>
+
+    <div class="about-img">
+      <img src="assets/about-fashion.jpg" alt="Nkem Atelier fashion design portrait">
+    </div>
+  </section>
+
+  <section class="social-footer">
+    <h3>Follow Us</h3>
+    <div class="social-buttons">
+      <a class="social-btn" href="https://www.instagram.com/shop.nkem" target="_blank">@shop.nkem</a>
+      <a class="social-btn beige" href="https://www.tiktok.com/@shop.nkem" target="_blank">@shop.nkem</a>
+    </div>
+  </section>
+</main>
+
+<main id="contact" class="page">
+  <section class="title">
+    <h1>Contact</h1>
+    <div class="subtitle">Enquire about your garment, fitting or appointment</div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="contact-frame">
+      <iframe src="https://tally.so/r/vGK4r0" title="Nkem Atelier enquiry form"></iframe>
+    </div>
+  </section>
+
+  <section class="social-footer">
+    <h3>Follow Us</h3>
+    <div class="social-buttons">
+      <a class="social-btn" href="https://www.instagram.com/shop.nkem" target="_blank">@shop.nkem</a>
+      <a class="social-btn beige" href="https://www.tiktok.com/@shop.nkem" target="_blank">@shop.nkem</a>
+    </div>
+  </section>
+</main>
+
+<script>
+  const buttons = document.querySelectorAll(".nav-btn");
+  const pages = document.querySelectorAll("main.page");
+
+  function showPage(id) {
+    pages.forEach(page => page.classList.toggle("active", page.id === id));
+    buttons.forEach(button => button.classList.toggle("active", button.dataset.page === id));
+    document.body.classList.toggle("home-active", id === "home");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => showPage(button.dataset.page));
+  });
+</script>
+</body>
+</html>
